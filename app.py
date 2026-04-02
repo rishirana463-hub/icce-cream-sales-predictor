@@ -29,6 +29,10 @@ def load_model():
         print("Please run 'python train_model.py' first to train and save the model.")
         return False
 
+
+    # Ensure model is loaded when running under WSGI servers like gunicorn.
+    MODEL_READY = load_model()
+
 @app.route('/')
 def index():
     """Render the main page."""
@@ -112,8 +116,8 @@ def internal_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
 if __name__ == '__main__':
-    # Load the model before starting the app
-    if load_model():
+    # Reuse model loaded at import time so both gunicorn and python app.py work.
+    if MODEL_READY:
         port = int(os.environ.get("PORT", 10000))
         print("\n✓ Flask app is ready to serve predictions!")
         print(f"✓ Visit http://localhost:{port} in your browser")

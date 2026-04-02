@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ice Cream Sales Predictor | ML Model</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="background-elements">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container">
+      <!-- Header -->
+      <header class="header">
+        <div class="header-content">
+          <div class="logo-section">
+            <div class="logo-icon">🍦</div>
+            <div>
+              <h1>Ice Cream Sales Predictor</h1>
+              <p class="subtitle">Advanced ML-Powered Analytics</p>
+            </div>
+          </div>
+        </div>
+        <div class="header-accent"></div>
+      </header>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Model Info Card -->
+        <div class="card model-card">
+          <div class="card-header">
+            <h2>📊 Model Information</h2>
+            <p class="card-subtext">Linear Regression Analysis Details</p>
+          </div>
+          <div class="card-body">
+            <div id="model-info-content">
+              <div class="loading-spinner"></div>
+              <p class="loading">Loading model information...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prediction Form -->
+        <div class="card prediction-card">
+          <div class="card-header">
+            <h2>🔮 Predict Sales</h2>
+            <p class="card-subtext">
+              Enter temperature to forecast ice cream sales
+            </p>
+          </div>
+          <div class="card-body">
+            <form id="prediction-form">
+              <div class="form-group">
+                <label for="temperature" class="form-label"
+                  >Temperature (°F)</label
+                >
+                <div class="input-wrapper">
+                  <input
+                    type="number"
+                    id="temperature"
+                    name="temperature"
+                    placeholder="e.g., 72"
+                    step="0.1"
+                    min="-50"
+                    max="150"
+                    required
+                  />
+                  <span class="input-unit">°F</span>
+                </div>
+                <small class="form-hint">Valid range: -50°F to 150°F</small>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <span class="btn-text">Predict Sales</span>
+                <span class="btn-icon">→</span>
+              </button>
+            </form>
+
+            <!-- Result Display -->
+            <div id="result-container" class="result-container hidden">
+              <div class="result-box success-box">
+                <div class="result-icon">✓</div>
+                <div id="result-content"></div>
+              </div>
+            </div>
+
+            <!-- Error Display -->
+            <div id="error-container" class="error-container hidden">
+              <div class="result-box error-box">
+                <div class="result-icon">⚠</div>
+                <div id="error-content"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Regression Plot -->
+        <div class="card plot-card">
+          <div class="card-header">
+            <h2>📈 Regression Visualization</h2>
+            <p class="card-subtext">Data points and fitted regression line</p>
+          </div>
+          <div class="card-body">
+            <div class="plot-container">
+              <img
+                src="{{ url_for('static', filename='regression_plot.png') }}?t={{ range(1, 100) | random }}"
+                alt="Regression Plot"
+                class="plot-image"
+              />
+            </div>
+            <p class="plot-description">
+              The visualization shows the relationship between temperature and
+              ice cream sales with a fitted linear regression line predicting
+              future sales based on temperature inputs.
+            </p>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+          <p class="footer-text">
+            Built with <span class="highlight">Flask</span> •
+            <span class="highlight">scikit-learn</span> •
+            <span class="highlight">Python</span>
+          </p>
+          <p class="footer-subtext">
+            Machine Learning | Data Science | Predictive Analytics
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

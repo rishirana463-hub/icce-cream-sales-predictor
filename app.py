@@ -31,7 +31,8 @@ def load_model():
 
 
     # Ensure model is loaded when running under WSGI servers like gunicorn.
-    MODEL_READY = load_model()
+    load_model()
+    MODEL_READY = model is not None
 
 @app.route('/')
 def index():

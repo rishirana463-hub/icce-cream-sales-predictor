@@ -114,9 +114,10 @@ def internal_error(error):
 if __name__ == '__main__':
     # Load the model before starting the app
     if load_model():
+        port = int(os.environ.get("PORT", 10000))
         print("\n✓ Flask app is ready to serve predictions!")
-        print("✓ Visit http://localhost:5000 in your browser")
-        app.run(debug=True, host='localhost', port=5000)
+        print(f"✓ Visit http://localhost:{port} in your browser")
+        app.run(host="0.0.0.0", port=port)
     else:
         print("\n✗ Cannot start app without a trained model.")
         print("Please run 'python train_model.py' first.")
